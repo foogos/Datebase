@@ -1,16 +1,16 @@
 <?php
 require_once'Connect.php';
 ?>
-<form action="bd.php" method="GET">
-Регион:<select name="Countrys">
+<form action="bd2.php" method="GET">
+Религия:<select name="Countrys">
  <?php
 $result=mysqli_query($link,"SELECT
-  region.region
-FROM region");
+  religion.religion
+FROM religion");
 $rows=mysqli_fetch_all($result,MYSQLI_ASSOC);
 foreach ($rows as $row)
 {
-	echo"<option>". ($row['region']."</option>");
+	echo"<option>". ($row['religion']."</option>");
 }
 ?>
  </select><br>
@@ -21,20 +21,22 @@ if($_GET['submit'])
 {
 	$result=mysqli_query($link,"SELECT
   country.NameCountry,
+  country.population,
   language.Namelanguage,
   country.capital
 FROM country
+  INNER JOIN religion
+    ON country.id_religion = religion.id_religion
   INNER JOIN language
     ON country.id_language = language.id_language
-  INNER JOIN region
-    ON country.id_region = region.id_region
-	WHERE region.region = '$_GET[Countrys]'");
+	WHERE religion.religion = '$_GET[Countrys]'");
 $rows=mysqli_fetch_all($result,MYSQLI_ASSOC);
 echo '<table border="1">';
 echo '<tr>';
 echo '<th>'."Страна".'</th>';
 echo '<th>'."Столица".'</th>';
 echo '<th>'."Язык".'</th>';
+echo '<th>'."Население".'</th>';
 echo '</tr>';
 foreach ($rows as $row)
 {
@@ -42,6 +44,7 @@ foreach ($rows as $row)
 	echo '<td>'.$row['NameCountry'].'</td>';
 	echo '<td>'.$row['capital'].'</td>';
 	echo '<td>'.$row['Namelanguage'].'</td>';
+	echo '<td>'.$row['population'].'</td>';
 	echo '</tr>';
 }
 }
