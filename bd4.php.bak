@@ -2,8 +2,9 @@
 require_once'Connect.php';
 ?>
 <form action="bd4.php" method="GET">
- Автор:<input type="text" name="NameAuthor"><br>
+ Регион:<input type="text" name="NameAuthor"><br>
 <input type="submit" name="submit" value="Поиск"><br>
+<input type="submit" name="submit1" value="Вернуться на главную"><br>
 </form>
 <?php
 if($_GET['submit'])
@@ -21,9 +22,9 @@ WHERE region.region = '$_GET[NameAuthor]'");
 $rows=mysqli_fetch_all($result,MYSQLI_ASSOC);
 echo '<table border="1">';
 echo '<tr>';
-echo '<th>'."brand".'</th>';
-echo '<th>'."model".'</th>';
-echo '<th>'."number_of_seats".'</th>';
+echo '<th>'."Страна".'</th>';
+echo '<th>'."Язык".'</th>';
+echo '<th>'."Столица".'</th>';
 echo '</tr>';
 foreach ($rows as $row)
 {
@@ -35,5 +36,9 @@ foreach ($rows as $row)
 
 }
 echo '</table>';
+}
+if($_GET['submit1'])
+{
+	header('Location:bd.php');
 }
 ?>

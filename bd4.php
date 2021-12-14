@@ -2,8 +2,9 @@
 require_once'Connect.php';
 ?>
 <form action="bd4.php" method="GET">
- Автор:<input type="text" name="NameAuthor"><br>
+ Регион:<input type="text" name="NameAuthor"><br>
 <input type="submit" name="submit" value="Поиск"><br>
+<input type="submit" name="submit1" value="Вернуться на главную"><br>
 </form>
 <?php
 if($_GET['submit'])
@@ -35,5 +36,9 @@ foreach ($rows as $row)
 
 }
 echo '</table>';
+}
+if($_GET['submit1'])
+{
+	header('Location:main.php');
 }
 ?>

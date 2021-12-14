@@ -15,6 +15,7 @@ foreach ($rows as $row)
 ?>
  </select><br>
 <input type="submit" name="submit" value="Поиск"><br>
+<input type="submit" name="submit1" value="Вернуться на главную"><br>
 </form>
 <?php
 if($_GET['submit'])
@@ -46,4 +47,9 @@ foreach ($rows as $row)
 }
 }
 echo '</table>';
+
+if($_GET['submit1'])
+{
+	header('Location:main.php');
+}
 ?>
